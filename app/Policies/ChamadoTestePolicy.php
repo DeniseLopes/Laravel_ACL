@@ -17,6 +17,16 @@ class ChamadoTestePolicy
      * @param  \App\Chamado  $chamado
      * @return mixed
      */
+
+    /*O ADMINISTRADOR TEM TODAS AS PERMISSÕES*/
+    public function before($user, $ability)
+    {
+        if ($user->eAdmin()) {
+            return true;
+        }
+    }
+
+   
     /*VISUALIZAR CHAMADO*/
     public function view(User $user, Chamado $chamado)
     {
@@ -30,7 +40,9 @@ class ChamadoTestePolicy
      * @return mixed
      */
     public function create(User $user)
+    /*determina se usuario possui um detereminado papel*/
     {
+        return true;
         
     }
 
@@ -43,7 +55,7 @@ class ChamadoTestePolicy
      */
     public function update(User $user, Chamado $chamado)
     {
-        //
+        return $user->id == $chamado->user_id;
     }
 
     /**
@@ -55,6 +67,6 @@ class ChamadoTestePolicy
      */
     public function delete(User $user, Chamado $chamado)
     {
-        
+         return $user->id == $chamado->user_id;
     }
 }

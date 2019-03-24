@@ -41,4 +41,8 @@ class User extends Authenticatable
         return $this-> id == 1;
     }
 
+    /*metodo de relacionamento de usuarios com papeis*/
+    public function papeis(){
+        return $this->belongsToMany(Papel::class);
+    }
 }
